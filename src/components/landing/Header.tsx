@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import { Menu, ShieldCheck, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { brand, navLinks } from "@/config/site";
+import { CheckoutButton } from "./CheckoutButton";
 import { cn } from "@/lib/utils";
 
 export function Header() {
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -18,69 +16,39 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-all duration-300",
-        scrolled
-          ? "border-b border-border/70 bg-background/85 backdrop-blur-md"
-          : "border-b border-transparent",
+        "bg-navy-deep sticky top-0 z-40 transition-shadow",
+        scrolled ? "shadow-[var(--shadow-lift)]" : "",
       )}
     >
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a href="#inicio" className="flex items-center gap-2.5">
-          <span className="bg-navy-gradient flex size-9 items-center justify-center rounded-lg">
-            <ShieldCheck className="size-4.5 text-gold" />
+      <div className="border-gold/40 mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 border-b px-5 py-3 sm:px-8">
+        <a
+          href="#inicio"
+          className="text-primary-foreground rounded-md leading-tight"
+          aria-label={`${brand.name}. Ir al inicio`}
+        >
+          <span className="font-display block text-sm font-semibold tracking-[0.12em] sm:text-base">
+            {brand.name}
           </span>
-          <span className="font-display text-navy text-lg font-semibold">{brand.name}</span>
+          <span className="text-primary-foreground/70 hidden text-xs sm:block">{brand.claim}</span>
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Navegación principal">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-muted-foreground hover:text-navy relative text-sm font-medium transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all hover:after:w-full"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <Button variant="hero" size="default" className="hidden sm:inline-flex" asChild>
-            <a href="#precio">Quiero empezar</a>
-          </Button>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Cerrar menú" : "Abrir menú"}
-            aria-expanded={open}
-            className="text-navy hover:bg-secondary flex size-10 items-center justify-center rounded-lg transition-colors md:hidden"
-          >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
-        </div>
-      </div>
-
-      {open ? (
-        <div className="border-t border-border bg-background px-5 pb-5 md:hidden">
-          <nav className="flex flex-col py-2" aria-label="Navegación móvil">
-            {navLinks.map((link) => (
+        <div className="flex items-center gap-6">
+          <nav aria-label="Secciones de la página" className="hidden items-center gap-6 md:flex">
+            {navLinks.map((l) => (
               <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="text-navy border-b border-border/60 py-3 text-sm font-medium"
+                key={l.href}
+                href={l.href}
+                className="text-primary-foreground/85 hover:text-gold-light rounded text-base transition-colors"
               >
-                {link.label}
+                {l.label}
               </a>
             ))}
           </nav>
-          <Button variant="hero" size="lg" className="mt-4 w-full" asChild>
-            <a href="#precio" onClick={() => setOpen(false)}>
-              Quiero empezar
-            </a>
-          </Button>
+          <CheckoutButton location="header" size="lg" className="shrink-0">
+            Acceder por 9,99 €
+          </CheckoutButton>
         </div>
-      ) : null}
+      </div>
     </header>
   );
 }
