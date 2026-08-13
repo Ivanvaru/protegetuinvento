@@ -1,24 +1,68 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Header } from "@/components/landing/Header";
+import { Hero } from "@/components/landing/Hero";
+import { Benefits } from "@/components/landing/Benefits";
+import { Curriculum } from "@/components/landing/Curriculum";
+import { Audience } from "@/components/landing/Audience";
+import { Instructor } from "@/components/landing/Instructor";
+import { EmailCapture } from "@/components/landing/EmailCapture";
+import { Pricing } from "@/components/landing/Pricing";
+import { Testimonials } from "@/components/landing/Testimonials";
+import { Faq } from "@/components/landing/Faq";
+import { Footer } from "@/components/landing/Footer";
+import { AiAssistant } from "@/components/landing/AiAssistant";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Patentia Academy — Formación online sobre patentes";
+const description =
+  "Aprende a proteger tu invención: proceso de patente, búsqueda de anterioridades, costes y estrategia. Formación práctica para emprendedores, inventores y equipos de innovación.";
+
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Course",
+          name: "Formación en patentes — Patentia Academy",
+          description,
+          inLanguage: "es",
+          provider: { "@type": "Organization", name: "Patentia Academy" },
+        }),
+      },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main>
+        <Hero />
+        <Benefits />
+        <Curriculum />
+        <Audience />
+        <Instructor />
+        {/* Captura de email antes del bloque de precio */}
+        <EmailCapture />
+        <Pricing />
+        <Testimonials />
+        <Faq />
+      </main>
+      <Footer />
+      <AiAssistant />
     </div>
   );
 }
