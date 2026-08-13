@@ -22,7 +22,9 @@ const schema = z.object({
 export function EmailCapture() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
+  const [errors, setErrors] = useState<{ name?: string | undefined; email?: string | undefined }>(
+    {},
+  );
   const [done, setDone] = useState(false);
 
   const onSubmit = (e: React.FormEvent) => {
