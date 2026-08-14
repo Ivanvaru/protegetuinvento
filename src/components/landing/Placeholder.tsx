@@ -1,6 +1,42 @@
 import { ImageOff } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/** Portada real renderizada con proporción vertical consistente. */
+export function CoverImage({
+  src,
+  alt,
+  className,
+  ratio = "aspect-[3/4]",
+  priority = false,
+  fit = "cover",
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  ratio?: string;
+  priority?: boolean;
+  fit?: "cover" | "contain";
+}) {
+  return (
+    <div
+      className={cn(
+        "border-tech/20 bg-navy-deep overflow-hidden rounded-xl border",
+        ratio,
+        className,
+      )}
+    >
+      <img
+        src={src}
+        alt={alt}
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
+        decoding={priority ? "sync" : "async"}
+        className={cn("h-full w-full", fit === "cover" ? "object-cover" : "object-contain")}
+      />
+    </div>
+  );
+}
+
 /**
  * Marcador editorial para portadas y capturas interiores.
  * ⚠️ SUSTITUIR por las imágenes reales cuando estén disponibles.
