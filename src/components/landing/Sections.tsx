@@ -19,7 +19,8 @@ import {
 } from "lucide-react";
 import { Reveal, Section, SectionHeading } from "./Section";
 import { CheckoutButton } from "./CheckoutButton";
-import { CoverPlaceholder } from "./Placeholder";
+import { CoverPlaceholder, CoverImage } from "./Placeholder";
+import { COVERS, getCover } from "@/config/covers";
 import {
   Accordion,
   AccordionContent,
@@ -91,17 +92,14 @@ export function Hero() {
           </p>
         </div>
 
-        {/* ⚠️ SUSTITUIR: composición con las cuatro portadas reales */}
+        {/* Composición editorial con las cuatro portadas */}
         <div className="grid w-full grid-cols-2 gap-4">
-          {[
-            "Portada del curso",
-            "Portada del cuaderno",
-            "Portada de la guía de instrucciones",
-            "Portada de la guía de profesionales",
-          ].map((label, i) => (
-            <CoverPlaceholder
-              key={label}
-              label={label}
+          {COVERS.map((c, i) => (
+            <CoverImage
+              key={c.key}
+              src={c.src}
+              alt={c.alt}
+              priority={i === 0}
               className={i % 2 === 1 ? "sm:translate-y-6" : ""}
             />
           ))}
@@ -275,8 +273,19 @@ export function Resources() {
               }
             >
               <div className="flex items-start gap-4">
-                {/* ⚠️ SUSTITUIR: miniatura de la portada real */}
-                <CoverPlaceholder label={r.cover} className="w-24 shrink-0 text-[0.7rem]" />
+                {(() => {
+                  const c = getCover(r.cover);
+                  return c ? (
+                    <CoverImage
+                      src={c.src}
+                      alt={c.alt}
+                      fit="cover"
+                      className="w-24 shrink-0"
+                    />
+                  ) : (
+                    <CoverPlaceholder label={r.cover} className="w-24 shrink-0 text-[0.7rem]" />
+                  );
+                })()}
                 <div className="min-w-0">
                   <span className="text-gold font-display text-2xl font-semibold">{r.n}</span>
                   <h3 className="text-navy mt-1 text-lg font-semibold">{r.title}</h3>
