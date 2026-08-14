@@ -1,20 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/landing/Header";
-import { Hero } from "@/components/landing/Hero";
-import { Benefits } from "@/components/landing/Benefits";
-import { Curriculum } from "@/components/landing/Curriculum";
-import { Audience } from "@/components/landing/Audience";
-import { Instructor } from "@/components/landing/Instructor";
-import { EmailCapture } from "@/components/landing/EmailCapture";
-import { Pricing } from "@/components/landing/Pricing";
-import { Testimonials } from "@/components/landing/Testimonials";
-import { Faq } from "@/components/landing/Faq";
-import { Footer } from "@/components/landing/Footer";
-import { AiAssistant } from "@/components/landing/AiAssistant";
+import {
+  Hero,
+  TrustStrip,
+  Problem,
+  Resources,
+  Roadmap,
+  Outcomes,
+  ForWhom,
+  Samples,
+  PriceBlock,
+  Faq,
+  FinalCta,
+  Independence,
+  Footer,
+} from "@/components/landing/Sections";
+import { PRICE_AMOUNT, brand } from "@/config/site";
 
-const title = "Patentia Academy — Formación online sobre patentes";
+const title = "Patentes y modelos de utilidad en España — Formación práctica";
 const description =
-  "Aprende a proteger tu invención: proceso de patente, búsqueda de anterioridades, costes y estrategia. Formación práctica para emprendedores, inventores y equipos de innovación.";
+  "Formación práctica e independiente para entender el proceso de patentes y modelos de utilidad en España: itinerario, cuaderno de trabajo y guías. Acceso por 9,99 €.";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -24,7 +29,6 @@ export const Route = createFileRoute("/")({
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
-      { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -34,11 +38,16 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Course",
-          name: "Formación en patentes — Patentia Academy",
+          "@type": "Product",
+          name: brand.productName,
           description,
-          inLanguage: "es",
-          provider: { "@type": "Organization", name: "Patentia Academy" },
+          brand: { "@type": "Brand", name: brand.name },
+          offers: {
+            "@type": "Offer",
+            price: PRICE_AMOUNT,
+            priceCurrency: "EUR",
+            availability: "https://schema.org/InStock",
+          },
         }),
       },
     ],
@@ -51,18 +60,19 @@ function Index() {
       <Header />
       <main>
         <Hero />
-        <Benefits />
-        <Curriculum />
-        <Audience />
-        <Instructor />
-        {/* Captura de email antes del bloque de precio */}
-        <EmailCapture />
-        <Pricing />
-        <Testimonials />
+        <TrustStrip />
+        <Problem />
+        <Resources />
+        <Roadmap />
+        <Outcomes />
+        <ForWhom />
+        <Samples />
+        <PriceBlock />
         <Faq />
+        <FinalCta />
+        <Independence />
       </main>
       <Footer />
-      <AiAssistant />
     </div>
   );
 }
