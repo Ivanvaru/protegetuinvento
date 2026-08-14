@@ -21,6 +21,7 @@ import { Reveal, Section, SectionHeading } from "./Section";
 import { CheckoutButton } from "./CheckoutButton";
 import { CoverPlaceholder, CoverImage } from "./Placeholder";
 import { COVERS, getCover } from "@/config/covers";
+import { SAMPLES } from "@/config/samples";
 import {
   Accordion,
   AccordionContent,
