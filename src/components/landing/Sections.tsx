@@ -21,6 +21,7 @@ import { Reveal, Section, SectionHeading } from "./Section";
 import { CheckoutButton } from "./CheckoutButton";
 import { CoverPlaceholder, CoverImage } from "./Placeholder";
 import { COVERS, getCover } from "@/config/covers";
+import { SAMPLES } from "@/config/samples";
 import {
   Accordion,
   AccordionContent,
@@ -461,15 +462,6 @@ export function ForWhom() {
 }
 
 /* ---------------- MUESTRA INTERIOR ---------------- */
-const samples = [
-  "Diagrama del curso",
-  "Tabla comparativa",
-  "Página de vocabulario",
-  "Ejercicio del cuaderno",
-  "Explicación de la guía",
-  "Tabla para comparar profesionales",
-];
-
 export function Samples() {
   return (
     <Section className="bg-mist/60" labelledBy="muestra-titulo">
@@ -482,20 +474,19 @@ export function Samples() {
         />
       </Reveal>
       <Reveal className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {samples.map((s) => (
-          <Dialog key={s}>
+        {SAMPLES.map((s) => (
+          <Dialog key={s.title}>
             <DialogTrigger className="focus-visible:ring-tech cursor-pointer rounded-xl text-left transition-transform hover:-translate-y-0.5">
-              <CoverPlaceholder label={s} ratio="aspect-[4/3]" />
+              <CoverImage src={s.src} alt={s.alt} ratio="aspect-[4/3]" fit="cover" />
+              <span className="text-navy mt-2 block text-sm font-semibold">{s.title}</span>
               <span className="text-tech mt-2 block text-sm font-medium">Ampliar muestra</span>
             </DialogTrigger>
             <DialogContent className="max-w-2xl">
               <DialogHeader>
-                <DialogTitle>{s}</DialogTitle>
-                <DialogDescription>
-                  Vista ampliada pendiente: la captura real del documento se incorporará aquí.
-                </DialogDescription>
+                <DialogTitle>{s.title}</DialogTitle>
+                <DialogDescription>Vista ampliada de la muestra interior.</DialogDescription>
               </DialogHeader>
-              <CoverPlaceholder label={s} ratio="aspect-[4/3]" />
+              <CoverImage src={s.src} alt={s.alt} ratio="aspect-[4/3]" fit="contain" />
             </DialogContent>
           </Dialog>
         ))}
