@@ -6,9 +6,9 @@
  * ============================================================
  */
 
-/* ⚠️ PENDIENTE: pegar aquí la URL real del checkout de Payhip (https://...).
-   Mientras esté vacía, todos los CTA se muestran desactivados. */
-export const PAYHIP_CHECKOUT_URL = "";
+/* URL activa del producto en Payhip. Todos los CTA de compra utilizan
+   este único enlace para mantener el recorrido de compra coherente. */
+export const PAYHIP_CHECKOUT_URL = "https://payhip.com/b/GtPlz";
 
 /** true solo cuando PAYHIP_CHECKOUT_URL es una URL http/https válida. */
 export const isCheckoutReady = /^https?:\/\/\S+$/.test(PAYHIP_CHECKOUT_URL.trim());
