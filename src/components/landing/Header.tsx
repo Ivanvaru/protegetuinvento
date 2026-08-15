@@ -47,7 +47,7 @@ export function Header() {
           <CheckoutButton
             location="header"
             size="lg"
-            className="max-w-[52vw] shrink px-3 text-sm sm:max-w-none sm:px-5"
+            className="min-w-0 max-w-[46vw] shrink truncate px-3 text-xs sm:max-w-none sm:px-5 sm:text-sm"
             pendingLabel="Próximamente"
           >
             Acceder por 9,99 €
