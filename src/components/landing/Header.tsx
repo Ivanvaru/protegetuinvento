@@ -44,7 +44,12 @@ export function Header() {
               </a>
             ))}
           </nav>
-          <CheckoutButton location="header" size="lg" className="shrink-0">
+          <CheckoutButton
+            location="header"
+            size="lg"
+            className="min-w-0 max-w-[46vw] shrink truncate px-3 text-xs sm:max-w-none sm:px-5 sm:text-sm"
+            pendingLabel="Próximamente"
+          >
             Acceder por 9,99 €
           </CheckoutButton>
         </div>

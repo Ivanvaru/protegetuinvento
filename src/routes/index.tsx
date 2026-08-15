@@ -15,7 +15,7 @@ import {
   Independence,
   Footer,
 } from "@/components/landing/Sections";
-import { PRICE_AMOUNT, brand } from "@/config/site";
+import { PRICE_AMOUNT, SITE_URL, brand } from "@/config/site";
 
 const title = "Patentes y modelos de utilidad en España — Formación práctica";
 const description =
@@ -29,10 +29,17 @@ export const Route = createFileRoute("/")({
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: `${SITE_URL}/images/portada-curso.webp` },
+      {
+        property: "og:image:alt",
+        content:
+          "Portada del curso: composición abstracta azul marino con órbitas doradas que convergen en un punto de luz central.",
+      },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_URL}/images/portada-curso.webp` },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
     scripts: [
       {
         type: "application/ld+json",

@@ -64,9 +64,7 @@ export function CoverPlaceholder({
       <span aria-hidden="true" className="blueprint-grid absolute inset-0 opacity-40" />
       <ImageOff aria-hidden="true" className="text-tech/70 relative size-6" />
       <span className="text-navy relative text-sm font-semibold">{label}</span>
-      <span className="text-muted-foreground relative text-xs">
-        Imagen pendiente de aportar
-      </span>
+      <span className="text-muted-foreground relative text-xs">Imagen pendiente de aportar</span>
     </div>
   );
 }
