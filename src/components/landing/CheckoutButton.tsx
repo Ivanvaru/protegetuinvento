@@ -13,6 +13,7 @@ export function CheckoutButton({
   className,
   variant = "gold",
   size = "xl",
+  pendingLabel = CHECKOUT_PENDING_LABEL,
 }: {
   children: React.ReactNode;
   /** identificador del bloque desde el que se pulsa (para el evento local) */
@@ -20,11 +21,13 @@ export function CheckoutButton({
   className?: string;
   variant?: ButtonProps["variant"];
   size?: ButtonProps["size"];
+  /** texto alternativo, más corto, mientras la compra no está activa */
+  pendingLabel?: string;
 }) {
   if (!isCheckoutReady) {
     return (
       <Button variant={variant} size={size} className={className} disabled>
-        {CHECKOUT_PENDING_LABEL}
+        {pendingLabel}
       </Button>
     );
   }
