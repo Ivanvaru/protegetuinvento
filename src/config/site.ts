@@ -20,7 +20,7 @@ export const CHECKOUT_PENDING_LABEL = "Compra disponible próximamente";
 export const SITE_URL = "https://protegetuinvento.lovable.app";
 
 export const brand = {
-  name: "PROTEGE TU INVENTO",
+  name: "TU RUTA INVENTIVA",
   claim: "Formación práctica e independiente",
   productName: "Patentes y modelos de utilidad en España",
   productSubtitle: "Formación práctica para comprender el proceso desde cero",
@@ -29,7 +29,7 @@ export const brand = {
   /* ⚠️ PENDIENTE: cuando exista un correo real, escribirlo aquí y se mostrará en el pie. */
   email: "",
   /* Marca visible en el aviso de copyright (no es una identidad fiscal). */
-  legalName: "PROTEGE TU INVENTO",
+  legalName: "TU RUTA INVENTIVA",
 };
 
 export const PRICE = "9,99 €";
