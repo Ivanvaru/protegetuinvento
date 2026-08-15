@@ -36,7 +36,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { OEPM_URL, PRICE, brand } from "@/config/site";
+import { OEPM_URL, PRICE, brand, isCheckoutReady } from "@/config/site";
 
 /* ---------------- HERO ---------------- */
 export function Hero() {
@@ -85,7 +85,9 @@ export function Hero() {
             Acceder al paquete completo por 9,99 €
           </CheckoutButton>
           <p className="text-primary-foreground/65 text-sm">
-            Pago y descarga segura gestionados mediante Payhip.
+            {isCheckoutReady
+              ? "Pago y descarga segura gestionados mediante Payhip."
+              : "El pago y la entrega digital se gestionarán mediante Payhip. La compra se activará antes del lanzamiento."}
           </p>
           <p className="text-primary-foreground/60 max-w-md text-sm">
             Hemos fijado un precio de acceso reducido para facilitar que esta información llegue a
@@ -115,7 +117,7 @@ const trustItems = [
   { icon: Layers, label: "4 recursos coordinados" },
   { icon: FileText, label: "Más de 200 páginas" },
   { icon: ClipboardList, label: "Ejercicios prácticos" },
-  { icon: Check, label: "Acceso inmediato" },
+  { icon: Check, label: "Descarga digital" },
 ];
 
 export function TrustStrip() {
@@ -470,7 +472,7 @@ export function Samples() {
           id="muestra-titulo"
           eyebrow="Muestra interior"
           title="Una formación diseñada para aprender haciendo"
-          description="Las páginas interiores reales se añadirán aquí. Por ahora se muestran marcadores claramente identificados."
+          description="Representaciones visuales de los diagramas, tablas, explicaciones y ejercicios que encontrarás en los cuatro recursos."
         />
       </Reveal>
       <Reveal className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -501,7 +503,7 @@ const priceIncludes = [
   "Cuaderno práctico.",
   "Guía de instrucciones.",
   "Guía para contratar profesionales.",
-  "Descarga inmediata.",
+  "Entrega digital mediante Payhip.",
   "Uso personal.",
   "Acceso a la versión adquirida.",
 ];
@@ -539,8 +541,9 @@ export function PriceBlock() {
             Acceder al paquete completo
           </CheckoutButton>
           <p className="text-muted-foreground mt-4 text-sm">
-            Serás dirigido al pago seguro de Payhip. Después de completar la compra, recibirás el
-            acceso a la descarga.
+            {isCheckoutReady
+              ? "Serás dirigido al pago seguro de Payhip. Después de completar la compra, recibirás el acceso a la descarga."
+              : "La compra todavía no está activa. El pago y la entrega digital se gestionarán mediante Payhip y se activarán antes del lanzamiento."}
           </p>
           <p className="text-muted-foreground mt-2 text-sm">
             Hemos fijado un precio de acceso reducido para facilitar que esta información llegue a
@@ -694,12 +697,12 @@ function LegalModal({ label }: { label: string }) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{label}</DialogTitle>
-          <DialogDescription>Pendiente de completar antes de publicar.</DialogDescription>
+          <DialogDescription>Información en preparación.</DialogDescription>
         </DialogHeader>
         <p className="text-muted-foreground text-base leading-relaxed">
-          Este apartado se publicará con el texto legal definitivo. No se incluye información
-          fiscal, domicilios, identificación del responsable ni condiciones jurídicas hasta que sean
-          facilitadas.
+          La compra todavía no está activa en esta web. Los datos de contacto y la información legal
+          completa se incorporarán antes de aceptar cualquier pago, con el texto definitivo de este
+          apartado.
         </p>
       </DialogContent>
     </Dialog>
@@ -720,8 +723,14 @@ export function Footer() {
           <p className="text-primary-foreground/70 mt-3 max-w-md text-base">
             Formación práctica e independiente sobre patentes y modelos de utilidad en España.
           </p>
-          {/* ⚠️ SUSTITUIR por el correo real de contacto */}
-          <p className="text-primary-foreground/70 mt-4 text-base">{brand.email}</p>
+          {/* El correo se muestra automáticamente cuando se configure en src/config/site.ts */}
+          {brand.email ? (
+            <p className="text-primary-foreground/70 mt-4 text-base">
+              <a className="hover:text-gold-light underline underline-offset-4" href={`mailto:${brand.email}`}>
+                {brand.email}
+              </a>
+            </p>
+          ) : null}
         </div>
 
         <nav aria-label="Enlaces del pie">
@@ -765,11 +774,12 @@ export function Footer() {
           © {year} {brand.legalName}. Todos los derechos reservados.
         </p>
         <p className="text-primary-foreground/60 mt-2 text-sm">
-          Pago y entrega digital gestionados mediante Payhip.
+          {isCheckoutReady
+            ? "Pago y entrega digital gestionados mediante Payhip."
+            : "La compra todavía no está activa: el pago y la entrega digital se gestionarán mediante Payhip."}
         </p>
         <p className="text-gold-light/90 mt-2 text-sm">
-          Textos legales y datos de contacto pendientes de completar antes de la publicación
-          definitiva.
+          Los datos de contacto y la información legal se incorporarán antes de aceptar pagos.
         </p>
       </div>
     </footer>
