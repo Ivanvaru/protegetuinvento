@@ -97,8 +97,10 @@
   --gold-light: oklch(0.8372 0.1179 89.5);
   --gradient-navy: linear-gradient(155deg, oklch(0.2185 0.0415 244.2), oklch(0.3 0.062 240));
   --gradient-gold: linear-gradient(90deg, var(--gold), var(--gold-light));
-  --shadow-soft: 0 1px 2px oklch(0.2185 0.0415 244.2 / 0.05), 0 10px 30px -14px oklch(0.2185 0.0415 244.2 / 0.18);
-  --shadow-lift: 0 2px 4px oklch(0.2185 0.0415 244.2 / 0.06), 0 24px 48px -20px oklch(0.2185 0.0415 244.2 / 0.28);
+  --shadow-soft:
+    0 1px 2px oklch(0.2185 0.0415 244.2 / 0.05), 0 10px 30px -14px oklch(0.2185 0.0415 244.2 / 0.18);
+  --shadow-lift:
+    0 2px 4px oklch(0.2185 0.0415 244.2 / 0.06), 0 24px 48px -20px oklch(0.2185 0.0415 244.2 / 0.28);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(0.905 0.012 220);
@@ -214,8 +216,16 @@
 
 @utility blueprint-grid {
   background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--tech) 12%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--tech) 12%, transparent) 1px, transparent 1px);
+    linear-gradient(
+      to right,
+      color-mix(in oklab, var(--tech) 12%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--tech) 12%, transparent) 1px,
+      transparent 1px
+    );
   background-size: 48px 48px;
 }
 

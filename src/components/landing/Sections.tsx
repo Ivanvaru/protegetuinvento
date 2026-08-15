@@ -41,7 +41,10 @@ import { OEPM_URL, PRICE, brand, isCheckoutReady } from "@/config/site";
 /* ---------------- HERO ---------------- */
 export function Hero() {
   return (
-    <section id="inicio" className="bg-navy-deep relative overflow-hidden px-5 py-16 sm:px-8 md:py-24">
+    <section
+      id="inicio"
+      className="bg-navy-deep relative overflow-hidden px-5 py-16 sm:px-8 md:py-24"
+    >
       <span aria-hidden="true" className="blueprint-grid absolute inset-0 opacity-[0.18]" />
       <span
         aria-hidden="true"
@@ -67,7 +70,10 @@ export function Hero() {
               "Utiliza información basada principalmente en fuentes oficiales.",
               "Descarga los cuatro recursos y trabaja a tu ritmo.",
             ].map((item) => (
-              <li key={item} className="text-primary-foreground/90 flex items-start gap-3 text-base">
+              <li
+                key={item}
+                className="text-primary-foreground/90 flex items-start gap-3 text-base"
+              >
                 <Check aria-hidden="true" className="text-gold mt-1 size-4 shrink-0" />
                 {item}
               </li>
@@ -78,7 +84,9 @@ export function Hero() {
             <span className="font-display text-primary-foreground text-4xl font-semibold">
               {PRICE}
             </span>
-            <span className="text-primary-foreground/70 text-base">Pago único · Descarga digital</span>
+            <span className="text-primary-foreground/70 text-base">
+              Pago único · Descarga digital
+            </span>
           </div>
 
           <CheckoutButton location="hero" className="w-full sm:w-auto">
@@ -279,12 +287,7 @@ export function Resources() {
                 {(() => {
                   const c = getCover(r.cover);
                   return c ? (
-                    <CoverImage
-                      src={c.src}
-                      alt={c.alt}
-                      fit="cover"
-                      className="w-24 shrink-0"
-                    />
+                    <CoverImage src={c.src} alt={c.alt} fit="cover" className="w-24 shrink-0" />
                   ) : (
                     <CoverPlaceholder label={r.cover} className="w-24 shrink-0 text-[0.7rem]" />
                   );
@@ -389,7 +392,10 @@ export function Outcomes() {
       </Reveal>
       <Reveal className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {outcomes.map((o) => (
-          <div key={o} className="bg-card flex items-start gap-3 rounded-xl border border-border p-5">
+          <div
+            key={o}
+            className="bg-card flex items-start gap-3 rounded-xl border border-border p-5"
+          >
             <Check aria-hidden="true" className="text-tech mt-1 size-4 shrink-0" />
             <p className="text-navy/90 text-base">{o}</p>
           </div>
@@ -726,7 +732,10 @@ export function Footer() {
           {/* El correo se muestra automáticamente cuando se configure en src/config/site.ts */}
           {brand.email ? (
             <p className="text-primary-foreground/70 mt-4 text-base">
-              <a className="hover:text-gold-light underline underline-offset-4" href={`mailto:${brand.email}`}>
+              <a
+                className="hover:text-gold-light underline underline-offset-4"
+                href={`mailto:${brand.email}`}
+              >
                 {brand.email}
               </a>
             </p>
