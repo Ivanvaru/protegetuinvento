@@ -17,7 +17,7 @@ import {
 } from "@/components/landing/Sections";
 import { PRICE_AMOUNT, SITE_URL, brand } from "@/config/site";
 
-const title = "Patentes y modelos de utilidad en España — Formación práctica";
+const title = "Tu Ruta Inventiva — Patentes y modelos de utilidad en España";
 const description =
   "Formación práctica e independiente para entender el proceso de patentes y modelos de utilidad en España: itinerario, cuaderno de trabajo y guías. Acceso por 9,99 €.";
 
