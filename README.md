@@ -1,4 +1,4 @@
-# PROTEGE TU INVENTO
+# TU RUTA INVENTIVA
 
 Landing de una sola página, en español, para presentar y vender una formación
 práctica e independiente sobre **patentes y modelos de utilidad en España**.
@@ -15,12 +15,10 @@ Precio único mostrado en toda la web: **9,99 €**.
 La formación es educativa e informativa, independiente de la OEPM, y no constituye
 asesoramiento jurídico ni profesional.
 
-## Pendiente de aportar por el propietario
+## Configuración y elementos pendientes
 
-- **Enlace de Payhip**: `PAYHIP_CHECKOUT_URL` en `src/config/site.ts` está vacío. Mientras
-  no sea una URL `https://` válida, todos los CTA se muestran desactivados con el texto
-  “Compra disponible próximamente”. Al rellenarlo, los botones recuperan automáticamente
-  sus textos de acceso y enlazan al checkout.
+- **Enlace de Payhip**: configurado mediante `PAYHIP_CHECKOUT_URL` en
+  `src/config/site.ts`. Todos los CTA utilizan este único enlace.
 - **Correo de contacto**: `brand.email` en `src/config/site.ts`. Vacío = no se muestra.
 - **Identidad legal y textos legales**: aviso legal, privacidad y condiciones de compra.
   Los modales del pie explican que la compra aún no está activa; no contienen datos
