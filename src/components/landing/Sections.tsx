@@ -709,7 +709,8 @@ const legalDocuments: Record<
         heading: "Titular del sitio",
         paragraphs: [
           `Titular: ${legal.sellerName}. NIF: ${legal.nif}. Domicilio: ${legal.address}, ${legal.country}. Correo electrónico: ${legal.email}.`,
-          `${brand.name} es la marca utilizada para presentar esta formación. No constituye una sociedad distinta de la persona titular indicada.`,
+          `Información registral: ${legal.registry}`,
+          `${brand.name} es la marca utilizada para presentar esta formación.`,
         ],
       },
       {
@@ -900,6 +901,11 @@ function LegalModal({ kind }: { kind: LegalKey }) {
         <DialogHeader>
           <DialogTitle>{document.label}</DialogTitle>
           <DialogDescription>{document.intro}</DialogDescription>
+          {legal.isDemo ? (
+            <p className="border-gold/50 bg-gold/10 text-navy mt-3 rounded-lg border p-3 text-sm font-semibold leading-relaxed">
+              {legal.demoNotice}
+            </p>
+          ) : null}
         </DialogHeader>
         <div className="max-h-[62vh] space-y-6 overflow-y-auto pr-3">
           {document.sections.map((section) => (
@@ -991,8 +997,9 @@ export function Footer() {
             : "La compra todavía no está activa: el pago y la entrega digital se gestionarán mediante Payhip."}
         </p>
         <p className="text-gold-light/90 mt-2 text-sm">
-          Venta, pago y entrega digital gestionados mediante Payhip. Consulta las condiciones de
-          compra antes de adquirir el producto.
+          {legal.isDemo
+            ? "Sitio en preparación · Datos legales ficticios de demostración · Compra desactivada."
+            : "Venta, pago y entrega digital gestionados mediante Payhip. Consulta las condiciones de compra antes de adquirir el producto."}
         </p>
       </div>
     </footer>
