@@ -33,16 +33,15 @@ export const brand = {
 };
 
 export const legal = {
-  /* Datos ficticios para previsualización. No usar para iniciar ventas. */
-  isDemo: true,
-  demoNotice:
-    "DATOS DE DEMOSTRACIÓN. TU RUTA INVENTIVA, S.L. no está constituida ni inscrita y esta información no identifica a un vendedor real.",
-  sellerName: "TU RUTA INVENTIVA, S.L. (SOCIEDAD FICTICIA)",
-  nif: "B-00000000 (NIF FICTICIO Y NO VÁLIDO)",
-  address: "Calle Ejemplo 00, 00000 Ciudad (DIRECCIÓN FICTICIA)",
-  email: "contacto@turutainventiva.example",
+  /* Datos del titular visibles únicamente dentro de los apartados legales. */
+  isDemo: false,
+  demoNotice: "",
+  sellerName: "IVAN VALENTIN RUIZ",
+  nif: "45125408Y",
+  address: "Calle Giralda 12, bajos 1, 08860 Castelldefels (Barcelona)",
+  email: "soporte.turutainventiva@gmail.com",
   country: "España",
-  registry: "Sociedad ficticia no inscrita en el Registro Mercantil.",
+  registry: "",
   lastUpdated: "16 de agosto de 2026",
 };
 
