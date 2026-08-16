@@ -32,6 +32,16 @@ export const brand = {
   legalName: "TU RUTA INVENTIVA",
 };
 
+export const legal = {
+  /* Completar estos cuatro campos antes de publicar la actualización. */
+  sellerName: "[NOMBRE Y APELLIDOS]",
+  nif: "[NIF]",
+  address: "[DOMICILIO COMPLETO]",
+  email: "[CORREO PÚBLICO]",
+  country: "España",
+  lastUpdated: "16 de agosto de 2026",
+};
+
 export const PRICE = "9,99 €";
 export const PRICE_AMOUNT = "9.99";
 
