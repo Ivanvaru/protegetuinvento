@@ -8,7 +8,7 @@
 
 /* URL activa del producto en Payhip. Todos los CTA de compra utilizan
    este único enlace para mantener el recorrido de compra coherente. */
-export const PAYHIP_CHECKOUT_URL = "https://payhip.com/b/GtPlz";
+export const PAYHIP_CHECKOUT_URL = "";
 
 /** true solo cuando PAYHIP_CHECKOUT_URL es una URL http/https válida. */
 export const isCheckoutReady = /^https?:\/\/\S+$/.test(PAYHIP_CHECKOUT_URL.trim());
@@ -33,12 +33,16 @@ export const brand = {
 };
 
 export const legal = {
-  /* Completar estos cuatro campos antes de publicar la actualización. */
-  sellerName: "[NOMBRE Y APELLIDOS]",
-  nif: "[NIF]",
-  address: "[DOMICILIO COMPLETO]",
-  email: "[CORREO PÚBLICO]",
+  /* Datos ficticios para previsualización. No usar para iniciar ventas. */
+  isDemo: true,
+  demoNotice:
+    "DATOS DE DEMOSTRACIÓN. TU RUTA INVENTIVA, S.L. no está constituida ni inscrita y esta información no identifica a un vendedor real.",
+  sellerName: "TU RUTA INVENTIVA, S.L. (SOCIEDAD FICTICIA)",
+  nif: "B-00000000 (NIF FICTICIO Y NO VÁLIDO)",
+  address: "Calle Ejemplo 00, 00000 Ciudad (DIRECCIÓN FICTICIA)",
+  email: "contacto@turutainventiva.example",
   country: "España",
+  registry: "Sociedad ficticia no inscrita en el Registro Mercantil.",
   lastUpdated: "16 de agosto de 2026",
 };
 
