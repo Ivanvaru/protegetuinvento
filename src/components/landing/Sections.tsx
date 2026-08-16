@@ -36,7 +36,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { OEPM_URL, PRICE, brand, isCheckoutReady } from "@/config/site";
+import { OEPM_URL, PRICE, brand, isCheckoutReady, legal } from "@/config/site";
 
 /* ---------------- HERO ---------------- */
 export function Hero() {
@@ -693,23 +693,231 @@ export function Independence() {
   );
 }
 
-/* ---------------- MODAL LEGAL PENDIENTE ---------------- */
-function LegalModal({ label }: { label: string }) {
+/* ---------------- INFORMACIÓN LEGAL ---------------- */
+type LegalKey = "aviso" | "privacidad" | "condiciones" | "desistimiento" | "contacto";
+
+const legalDocuments: Record<
+  LegalKey,
+  { label: string; intro: string; sections: Array<{ heading: string; paragraphs: string[] }> }
+> = {
+  aviso: {
+    label: "Aviso legal",
+    intro:
+      "Este apartado identifica a la persona responsable del sitio y establece sus condiciones generales de utilización.",
+    sections: [
+      {
+        heading: "Titular del sitio",
+        paragraphs: [
+          `Titular: ${legal.sellerName}. NIF: ${legal.nif}. Domicilio: ${legal.address}, ${legal.country}. Correo electrónico: ${legal.email}.`,
+          `${brand.name} es la marca utilizada para presentar esta formación. No constituye una sociedad distinta de la persona titular indicada.`,
+        ],
+      },
+      {
+        heading: "Finalidad y carácter independiente",
+        paragraphs: [
+          "El sitio ofrece información y una formación digital sobre patentes y modelos de utilidad. Su finalidad es exclusivamente educativa e informativa.",
+          "La iniciativa es privada e independiente. No está organizada, certificada, patrocinada ni avalada por la Oficina Española de Patentes y Marcas (OEPM), y no presta asesoramiento jurídico, técnico o profesional personalizado.",
+        ],
+      },
+      {
+        heading: "Propiedad intelectual",
+        paragraphs: [
+          "Los textos, documentos, ilustraciones, tablas, diagramas, diseño y demás contenidos propios están protegidos por la normativa de propiedad intelectual. La compra concede únicamente una licencia de uso personal y no exclusiva.",
+          "No está permitida la reventa, distribución, publicación, cesión a terceros, modificación para su comercialización ni reproducción masiva de los materiales sin autorización escrita.",
+        ],
+      },
+      {
+        heading: "Responsabilidad y enlaces externos",
+        paragraphs: [
+          "Se procura que la información sea clara y esté basada principalmente en fuentes oficiales, pero las normas, tasas, formularios, criterios y procedimientos pueden cambiar. Antes de presentar una solicitud o tomar una decisión, debe comprobarse la información oficial vigente.",
+          "Los enlaces a la OEPM, Payhip u otros sitios externos se facilitan como referencia. Cada tercero es responsable de sus contenidos, disponibilidad y políticas.",
+        ],
+      },
+      {
+        heading: "Legislación aplicable",
+        paragraphs: [
+          "Este sitio se rige por la legislación española, sin perjuicio de los derechos imperativos que correspondan a consumidores y usuarios por razón de su residencia.",
+          `Última actualización: ${legal.lastUpdated}.`,
+        ],
+      },
+    ],
+  },
+  privacidad: {
+    label: "Política de privacidad",
+    intro:
+      "Esta política explica qué datos pueden tratarse al utilizar el sitio, contactar con el vendedor o adquirir el producto.",
+    sections: [
+      {
+        heading: "Responsable del tratamiento",
+        paragraphs: [
+          `Responsable: ${legal.sellerName}. NIF: ${legal.nif}. Dirección: ${legal.address}, ${legal.country}. Contacto: ${legal.email}.`,
+        ],
+      },
+      {
+        heading: "Datos y finalidades",
+        paragraphs: [
+          "Si contactas por correo electrónico, se tratarán los datos que facilites para responder a tu consulta y conservar el historial estrictamente necesario.",
+          "Cuando compras, Payhip y el proveedor de pago seleccionado procesan los datos necesarios para gestionar el cobro, los impuestos, el recibo y la descarga. El vendedor recibe la información básica del pedido necesaria para atenderlo, pero no accede a tus credenciales ni a los datos completos del medio de pago.",
+        ],
+      },
+      {
+        heading: "Base jurídica y conservación",
+        paragraphs: [
+          "Las bases jurídicas pueden ser la aplicación de medidas precontractuales, la ejecución de la compra, el cumplimiento de obligaciones legales y, cuando corresponda, tu consentimiento.",
+          "Los datos se conservarán durante el tiempo necesario para responder, gestionar la compra y cumplir las obligaciones fiscales, contables, de consumo o de defensa ante posibles reclamaciones. Después se suprimirán o bloquearán conforme a la normativa.",
+        ],
+      },
+      {
+        heading: "Destinatarios y servicios externos",
+        paragraphs: [
+          "Los datos podrán ser tratados por proveedores necesarios para el funcionamiento del servicio, especialmente Payhip, PayPal y los servicios técnicos de alojamiento. Cada proveedor aplica sus propias condiciones y política de privacidad.",
+          "Algunos proveedores pueden prestar servicios desde fuera del Espacio Económico Europeo. En esos casos deberán utilizar los mecanismos de garantía exigidos por la normativa aplicable.",
+        ],
+      },
+      {
+        heading: "Derechos",
+        paragraphs: [
+          `Puedes solicitar acceso, rectificación, supresión, oposición, limitación o portabilidad escribiendo a ${legal.email} e indicando el derecho que deseas ejercer. También puedes presentar una reclamación ante la Agencia Española de Protección de Datos.`,
+          "No envíes información confidencial sobre una invención mediante el formulario o correo de contacto. La compra no crea una relación de confidencialidad ni un encargo profesional.",
+        ],
+      },
+      {
+        heading: "Cambios",
+        paragraphs: [
+          `Esta política puede actualizarse para reflejar cambios legales o técnicos. Última actualización: ${legal.lastUpdated}.`,
+        ],
+      },
+    ],
+  },
+  condiciones: {
+    label: "Condiciones de compra y descarga",
+    intro:
+      "Estas condiciones regulan la adquisición del paquete digital Tu Ruta Inventiva a través de Payhip.",
+    sections: [
+      {
+        heading: "Vendedor y producto",
+        paragraphs: [
+          `El vendedor es ${legal.sellerName}, con NIF ${legal.nif}, domicilio en ${legal.address}, ${legal.country}, y correo ${legal.email}.`,
+          "El producto es una formación digital compuesta por cuatro recursos principales y materiales complementarios. No incluye documentos impresos, representación ante la OEPM, redacción de solicitudes ni asesoramiento individual.",
+        ],
+      },
+      {
+        heading: "Precio y contratación",
+        paragraphs: [
+          `El precio mostrado es ${PRICE}, con los impuestos aplicables incluidos cuando así se indique en el checkout. Antes de confirmar el pago, Payhip muestra el importe total.`,
+          "El pago, la confirmación del pedido, el recibo y la entrega digital se gestionan mediante Payhip y el proveedor de pago disponible. La compra queda formalizada cuando el pago es confirmado.",
+        ],
+      },
+      {
+        heading: "Entrega y requisitos técnicos",
+        paragraphs: [
+          "Tras la compra, Payhip muestra una página de descarga y envía al correo utilizado en el checkout un recibo con un enlace personal. El comprador debe introducir correctamente su dirección de correo y conservar el recibo.",
+          "El comprador necesita conexión a internet, espacio de almacenamiento y software capaz de abrir archivos ZIP, PDF y DOCX. Si el enlace o los archivos presentan un error, puede solicitar asistencia en el correo de contacto.",
+        ],
+      },
+      {
+        heading: "Licencia de uso",
+        paragraphs: [
+          "La compra concede a una sola persona una licencia personal, no exclusiva y no transferible para consultar e imprimir los materiales para su propio uso.",
+          "No está permitido compartir públicamente los archivos, revenderlos, subirlos a plataformas, distribuir copias, eliminar avisos de autoría ni utilizarlos para crear un producto comercial sustancialmente equivalente.",
+        ],
+      },
+      {
+        heading: "Contenido y responsabilidad",
+        paragraphs: [
+          "La formación no garantiza la patentabilidad de una invención, la admisión de una solicitud ni la concesión de una patente o modelo de utilidad.",
+          "Corresponde al comprador comprobar las fuentes oficiales vigentes y decidir cuándo necesita la revisión de un agente de la propiedad industrial, abogado, técnico u otro profesional cualificado.",
+        ],
+      },
+      {
+        heading: "Incidencias, conformidad y reclamaciones",
+        paragraphs: [
+          `Las incidencias deben comunicarse a ${legal.email}, indicando el correo de compra y una descripción del problema, sin incluir información confidencial sobre una invención.`,
+          "Si el contenido no puede descargarse, está dañado o no coincide con lo anunciado, se ofrecerá una solución adecuada conforme a la normativa aplicable, como restablecer el acceso, sustituir el archivo o, cuando proceda, reembolsar el importe.",
+        ],
+      },
+    ],
+  },
+  desistimiento: {
+    label: "Política de desistimiento",
+    intro:
+      "Esta política explica el derecho de desistimiento aplicable a la descarga inmediata de contenido digital.",
+    sections: [
+      {
+        heading: "Regla general",
+        paragraphs: [
+          "En las compras a distancia, los consumidores disponen con carácter general de catorce días naturales para desistir, salvo que resulte aplicable una excepción legal.",
+        ],
+      },
+      {
+        heading: "Contenido digital de descarga inmediata",
+        paragraphs: [
+          "Cuando el contenido digital no se entrega en un soporte material, el derecho de desistimiento puede perderse una vez iniciada la ejecución si el comprador ha consentido expresamente que la descarga comience durante el plazo de desistimiento, ha reconocido que con ello pierde ese derecho y ha recibido la confirmación exigida legalmente.",
+          "La mera inclusión de esta cláusula no sustituye ese consentimiento expreso. Si no se cumplen todos los requisitos legales, el comprador conserva los derechos que le correspondan.",
+        ],
+      },
+      {
+        heading: "Falta de conformidad e incidencias",
+        paragraphs: [
+          "La pérdida del derecho de desistimiento no elimina los derechos del consumidor cuando el archivo sea defectuoso, no pueda descargarse o el contenido no se corresponda con lo anunciado.",
+          `Para comunicar un desistimiento o una incidencia, escribe a ${legal.email} indicando el correo utilizado en la compra y el número de pedido. No incluyas datos técnicos confidenciales de tu invención.`,
+        ],
+      },
+    ],
+  },
+  contacto: {
+    label: "Contacto",
+    intro:
+      "Utiliza este canal para consultas sobre la compra, el pago, el correo de entrega o la descarga de los archivos.",
+    sections: [
+      {
+        heading: "Correo de atención",
+        paragraphs: [
+          `Correo electrónico: ${legal.email}.`,
+          "Para localizar un pedido, indica el correo utilizado durante la compra y, si lo tienes, el número de pedido. No envíes contraseñas, datos completos de pago ni documentación confidencial sobre una invención.",
+        ],
+      },
+      {
+        heading: "Alcance de la atención",
+        paragraphs: [
+          "El contacto incluido con la compra cubre incidencias técnicas y administrativas relacionadas con el producto digital.",
+          "No incluye consultas sobre patentabilidad, estrategias de protección, redacción de reivindicaciones, valoración de una invención o asesoramiento jurídico y técnico personalizado.",
+        ],
+      },
+    ],
+  },
+};
+
+function LegalModal({ kind }: { kind: LegalKey }) {
+  const document = legalDocuments[kind];
+
   return (
     <Dialog>
       <DialogTrigger className="text-primary-foreground/75 hover:text-gold-light cursor-pointer rounded text-base transition-colors">
-        {label}
+        {document.label}
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-h-[85vh] max-w-3xl overflow-hidden">
         <DialogHeader>
-          <DialogTitle>{label}</DialogTitle>
-          <DialogDescription>Información en preparación.</DialogDescription>
+          <DialogTitle>{document.label}</DialogTitle>
+          <DialogDescription>{document.intro}</DialogDescription>
         </DialogHeader>
-        <p className="text-muted-foreground text-base leading-relaxed">
-          La compra todavía no está activa en esta web. Los datos de contacto y la información legal
-          completa se incorporarán antes de aceptar cualquier pago, con el texto definitivo de este
-          apartado.
-        </p>
+        <div className="max-h-[62vh] space-y-6 overflow-y-auto pr-3">
+          {document.sections.map((section) => (
+            <section key={section.heading}>
+              <h3 className="text-navy text-base font-semibold">{section.heading}</h3>
+              <div className="mt-2 space-y-2">
+                {section.paragraphs.map((paragraph) => (
+                  <p
+                    key={paragraph}
+                    className="text-muted-foreground text-sm leading-relaxed sm:text-base"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
       </DialogContent>
     </Dialog>
   );
@@ -744,18 +952,13 @@ export function Footer() {
 
         <nav aria-label="Enlaces del pie">
           <ul className="grid gap-2.5">
-            <li>
-              <LegalModal label="Aviso legal" />
-            </li>
-            <li>
-              <LegalModal label="Privacidad" />
-            </li>
-            <li>
-              <LegalModal label="Condiciones de compra" />
-            </li>
-            <li>
-              <LegalModal label="Contacto" />
-            </li>
+            {(
+              ["aviso", "privacidad", "condiciones", "desistimiento", "contacto"] as LegalKey[]
+            ).map((kind) => (
+              <li key={kind}>
+                <LegalModal kind={kind} />
+              </li>
+            ))}
             <li>
               <a
                 href={OEPM_URL}
@@ -788,7 +991,8 @@ export function Footer() {
             : "La compra todavía no está activa: el pago y la entrega digital se gestionarán mediante Payhip."}
         </p>
         <p className="text-gold-light/90 mt-2 text-sm">
-          Los datos de contacto y la información legal se incorporarán antes de aceptar pagos.
+          Venta, pago y entrega digital gestionados mediante Payhip. Consulta las condiciones de
+          compra antes de adquirir el producto.
         </p>
       </div>
     </footer>
