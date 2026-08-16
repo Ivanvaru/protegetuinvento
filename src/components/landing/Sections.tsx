@@ -709,7 +709,7 @@ const legalDocuments: Record<
         heading: "Titular del sitio",
         paragraphs: [
           `Titular: ${legal.sellerName}. NIF: ${legal.nif}. Domicilio: ${legal.address}, ${legal.country}. Correo electrónico: ${legal.email}.`,
-          `Información registral: ${legal.registry}`,
+          ...(legal.registry ? [`Información registral: ${legal.registry}`] : []),
           `${brand.name} es la marca utilizada para presentar esta formación.`,
         ],
       },
@@ -997,8 +997,8 @@ export function Footer() {
             : "La compra todavía no está activa: el pago y la entrega digital se gestionarán mediante Payhip."}
         </p>
         <p className="text-gold-light/90 mt-2 text-sm">
-          {legal.isDemo
-            ? "Sitio en preparación · Datos legales ficticios de demostración · Compra desactivada."
+          {!isCheckoutReady
+            ? "Sitio en preparación · Compra desactivada hasta el lanzamiento."
             : "Venta, pago y entrega digital gestionados mediante Payhip. Consulta las condiciones de compra antes de adquirir el producto."}
         </p>
       </div>
