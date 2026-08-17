@@ -3,6 +3,8 @@
 Landing de una sola página, en español, para presentar y vender una formación
 práctica e independiente sobre **patentes y modelos de utilidad en España**.
 
+Dominio oficial: **https://turutainventiva.es**.
+
 Precio único mostrado en toda la web: **9,99 €**.
 
 ## Los cuatro recursos del paquete
@@ -20,9 +22,9 @@ asesoramiento jurídico ni profesional.
 - **Enlace de Payhip**: configurado mediante `PAYHIP_CHECKOUT_URL` en
   `src/config/site.ts`. Todos los CTA utilizan este único enlace.
 - **Correo de contacto**: `brand.email` en `src/config/site.ts`. Vacío = no se muestra.
+- **Dominio**: `SITE_URL` en `src/config/site.ts`. La conexión DNS y HTTPS se gestiona en Cloudflare.
 - **Identidad legal y textos legales**: aviso legal, privacidad y condiciones de compra.
-  Los modales del pie explican que la compra aún no está activa; no contienen datos
-  fiscales, domicilios ni nombres inventados.
+  Los datos del titular solo aparecen en los apartados legales.
 
 ## Dónde editar
 
