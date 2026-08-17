@@ -15,7 +15,7 @@ import {
   Independence,
   Footer,
 } from "@/components/landing/Sections";
-import { PRICE_AMOUNT, SITE_URL, brand } from "@/config/site";
+import { PRICE_AMOUNT, SITE_URL, brand, isCheckoutReady } from "@/config/site";
 
 const title = "Tu Ruta Inventiva — Patentes y modelos de utilidad en España";
 const description =
@@ -48,12 +48,16 @@ export const Route = createFileRoute("/")({
           "@type": "Product",
           name: brand.productName,
           description,
+          url: `${SITE_URL}/`,
+          image: `${SITE_URL}/images/portada-curso.webp`,
           brand: { "@type": "Brand", name: brand.name },
           offers: {
             "@type": "Offer",
             price: PRICE_AMOUNT,
             priceCurrency: "EUR",
-            availability: "https://schema.org/InStock",
+            availability: isCheckoutReady
+              ? "https://schema.org/InStock"
+              : "https://schema.org/OutOfStock",
           },
         }),
       },
