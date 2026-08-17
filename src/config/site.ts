@@ -16,8 +16,8 @@ export const isCheckoutReady = /^https?:\/\/\S+$/.test(PAYHIP_CHECKOUT_URL.trim(
 /** Texto de los CTA mientras la compra no está activa. */
 export const CHECKOUT_PENDING_LABEL = "Compra disponible próximamente";
 
-/** URL pública provisional en Cloudflare (canonical, og:url y datos estructurados). */
-export const SITE_URL = "https://protegetuinvento.ivan-valentin-98.workers.dev";
+/** Dominio oficial (canonical, og:url y datos estructurados). */
+export const SITE_URL = "https://turutainventiva.es";
 
 export const brand = {
   name: "TU RUTA INVENTIVA",
