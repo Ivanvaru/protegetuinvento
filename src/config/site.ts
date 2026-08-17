@@ -26,8 +26,7 @@ export const brand = {
   productSubtitle: "Formación práctica para comprender el proceso desde cero",
   purpose:
     "Aprende a entender, preparar y organizar el proceso con criterio, y descubre cuándo necesitas ayuda profesional.",
-  /* ⚠️ PENDIENTE: cuando exista un correo real, escribirlo aquí y se mostrará en el pie. */
-  email: "",
+  email: "soporte.turutainventiva@outlook.es",
   /* Marca visible en el aviso de copyright (no es una identidad fiscal). */
   legalName: "TU RUTA INVENTIVA",
 };
@@ -39,7 +38,7 @@ export const legal = {
   sellerName: "IVAN VALENTIN RUIZ",
   nif: "45125408Y",
   address: "Calle Giralda 12, bajos 1, 08860 Castelldefels (Barcelona)",
-  email: "soporte.turutainventiva@gmail.com",
+  email: "soporte.turutainventiva@outlook.es",
   country: "España",
   registry: "",
   lastUpdated: "16 de agosto de 2026",
